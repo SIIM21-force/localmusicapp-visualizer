@@ -6,26 +6,20 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  build-and-deploy: # This job name might be different in your file
     runs-on: ubuntu-latest
-
+    permissions:      # <-- Add this block
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
+      # Add steps here to install dependencies and build your project
+      # e.g., npm install and npm run build
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build
-        run: npm run build
-
-      - name: Deploy
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: ./docs # Make sure this matches your build output folder
+
