@@ -1,73 +1,94 @@
-# React + TypeScript + Vite
+# Music Player with Audio Visualizer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a web-based music player with a bar spectrum audio visualizer. The user interface is inspired by YouTube Music and allows users to play local audio files.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+*   **YouTube Music-inspired UI:** A modern and intuitive interface built with Material-UI.
+*   **Local Music Playback:** Users can select and play audio files from their local device.
+*   **Audio Visualization:** A bar spectrum visualizer powered by `audioMotion-analyzer` and the Web Audio API.
+*   **Responsive Design:** The application is responsive and works on both desktop and mobile devices.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+*   **Frontend:** React, TypeScript
+*   **UI Library:** Material-UI
+*   **Audio Visualization:** `audio-motion-analyzer`
+*   **Routing:** `react-router-dom`
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+To get a local copy up and running, follow these simple steps.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Prerequisites
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+*   Node.js and npm installed.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Installation
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+1.  Clone the repo
+    ```sh
+    git clone https://github.com/your_username_/your_repository_name.git
+    ```
+2.  Install NPM packages
+    ```sh
+    npm install
+    ```
+3.  Run the development server
+    ```sh
+    npm run dev
+    ```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Deployment to GitHub Pages
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+To deploy this application to GitHub Pages, follow these steps:
+
+1.  **Install `gh-pages`**
+
+    ```sh
+    npm install -D gh-pages
+    ```
+
+2.  **Set the `homepage` in `package.json`**
+
+    Open your `package.json` file and add a `homepage` field:
+
+    ```json
+    "homepage": "https://your_username.github.io/your_repository_name",
+    ```
+
+3.  **Update `vite.config.ts`**
+
+    In your `vite.config.ts` file, you need to set the `base` option to your repository name.
+
+    ```ts
+    import { defineConfig } from 'vite'
+    import react from '@vitejs/plugin-react'
+
+    // https://vitejs.dev/config/
+    export default defineConfig({
+      plugins: [react()],
+      base: '/your_repository_name/'
+    })
+    ```
+
+4.  **Add `deploy` scripts to `package.json`**
+
+    Add the following scripts to your `package.json`:
+
+    ```json
+    "scripts": {
+      "predeploy": "npm run build",
+      "deploy": "gh-pages -d dist"
+    }
+    ```
+
+5.  **Deploy the application**
+
+    Run the following command to deploy your application to GitHub Pages:
+
+    ```sh
+    npm run deploy
+    ```
+
+    This will create a `gh-pages` branch in your repository and deploy the contents of the `dist` folder to it. You can then access your application at the URL you specified in the `homepage` field.
